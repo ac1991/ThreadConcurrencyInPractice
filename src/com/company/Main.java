@@ -8,7 +8,7 @@ public class Main {
     AtomicLong a;
     AtomicReference<String> ss;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         DecompositionFactor decompositionFactor = new DecompositionFactor();
 	    for (int i = 0; i < 10000; i++){
 	         new Thread(new Runnable() {
@@ -19,24 +19,9 @@ public class Main {
             }, "Thread" + i).start();
 
         }
-    }
 
-
-}
-
-class Parent{
-    //synchronized是可重入锁
-    public synchronized void doSomething(){
-        System.out.println(Thread.currentThread().getName() + ":父类啪啪啪");
-    }
-}
-
- class Child extends Parent{
-    @Override
-    public synchronized void doSomething() {
-        System.out.println(Thread.currentThread().getName() + ":子类啪啪啪");
-        super.doSomething();
-        System.out.println(Thread.currentThread().getName() + ":子类啪啪啪完事儿了");
+	    Thread.sleep(1000);
+	    System.out.println(decompositionFactor.getClass().getName());
     }
 }
 
@@ -57,3 +42,20 @@ class DecompositionFactor{
         }
     }
 }
+
+class Parent{
+    //synchronized是可重入锁
+    public synchronized void doSomething(){
+        System.out.println(Thread.currentThread().getName() + ":父类啪啪啪");
+    }
+}
+
+ class Child extends Parent{
+    @Override
+    public synchronized void doSomething() {
+        System.out.println(Thread.currentThread().getName() + ":子类啪啪啪");
+        super.doSomething();
+        System.out.println(Thread.currentThread().getName() + ":子类啪啪啪完事儿了");
+    }
+}
+
