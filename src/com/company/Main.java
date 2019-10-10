@@ -20,6 +20,9 @@ public class Main {
 
         }
 
+	    Parent11 parent11 = new Parent11();
+	    parent11.getJ();
+
 	    Thread.sleep(1000);
 	    System.out.println(decompositionFactor.getClass().getName());
     }
@@ -50,11 +53,11 @@ class Parent{
     }
 }
 
- class Child extends Parent{
-    @Override
+ class Child extends Parent11 {
+//    @Override
     public synchronized void doSomething() {
         System.out.println(Thread.currentThread().getName() + ":子类啪啪啪");
-        super.doSomething();
+//        super.doSomething();
         System.out.println(Thread.currentThread().getName() + ":子类啪啪啪完事儿了");
     }
 }
